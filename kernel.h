@@ -16,6 +16,8 @@
 #define SSTATUS_SPIE (1 << 5) // Enable Interrupt in User Mode
 #define USER_BASE 0x1000000
 
+#define SCAUSE_ECALL 8
+
 #define PANIC(fmt, ...) \
   do { \
     printf("PANIC: %s:%d: " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__); \
