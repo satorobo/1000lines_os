@@ -39,8 +39,16 @@ void putchar(char ch) {
   sbi_call(ch, 0, 0, 0, 0, 0, 0, 1 /* Console Putchar*/);
 }
 
+__attribute__((naked))
 void user_entry(void) {
-  PANIC("not yet implemented");
+  __asm__ __volatile__(
+    "csrw sepc, %[sepc]\n"
+    "csrw sstatus, %[sstatus]\n"
+    "sret\n"
+    :
+    : [sepc] "r" (USER_BASE), 
+      [sstatus] "r" (SSTATUS_SPIE)
+  );
 }
 
 struct process *create_process(const void *image, size_t image_size) {
