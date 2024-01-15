@@ -17,6 +17,7 @@ int syscall(int sysno, int arg0, int arg1, int arg2) {
 }
 
 __attribute__((noreturn)) void exit(void) {
+  syscall(SYS_EXIT, 0, 0, 0);
   for (;;);
 }
 
