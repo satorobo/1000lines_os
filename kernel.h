@@ -13,6 +13,8 @@
 #define PAGE_X (1 << 3) // Executable
 #define PAGE_U (1 << 4) // Accesssible from User Mode
 
+#define USER_BASE 0x1000000
+
 #define PANIC(fmt, ...) \
   do { \
     printf("PANIC: %s:%d: " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__); \
