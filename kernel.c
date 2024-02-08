@@ -10,8 +10,6 @@ extern char _binary_shell_bin_start[], _binary_shell_bin_size[];
 struct process procs[PROCS_MAX];
 struct process *current_proc; // Current Process
 struct process *idle_proc;    // Idle Process
-struct process *proc_a;
-struct process *proc_b;
 
 struct virtio_virtq *blk_request_vq;
 struct virtio_blk_req *blk_req;
@@ -179,28 +177,6 @@ void yield(void) {
   struct process *prev = current_proc;
   current_proc = next;
   switch_context(&prev->sp, &next->sp);
-}
-
-void proc_a_entry(void) {
-  printf("starting process A\n");
-  while(1) {
-    putchar('A');
-    yield();
-
-    for (int i = 0; i < 30000000; i++)
-      __asm__ __volatile__("nop");
-  }
-}
-
-void proc_b_entry(void) {
-  printf("starting process B\n");
-  while(1) {
-    putchar('B');
-    yield();
-
-    for (int i = 0; i < 30000000; i++)
-      __asm__ __volatile__("nop");
-  }
 }
 
 paddr_t alloc_pages(uint32_t n) {
