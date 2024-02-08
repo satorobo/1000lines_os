@@ -112,7 +112,7 @@ struct process {
 #define VIRTIO_BLK_T_OUT 1
 
 struct virtq_desc {
-  uint16_t addr;
+  uint64_t addr;
   uint32_t len;
   uint16_t flags;
   uint16_t next;
